@@ -38,6 +38,7 @@ namespace SmartDelivery.Modules.MShipper
                 shipper = new Shipper();
                 shipper.Id = Guid.NewGuid();
             }
+            shipper.IdNavigation.Role = 4;
             shipper.Name = this.Name;
             shipper.Age = this.Age;
             shipper.Phone = this.Phone;

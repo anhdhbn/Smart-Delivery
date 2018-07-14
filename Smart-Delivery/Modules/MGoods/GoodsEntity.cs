@@ -13,8 +13,11 @@ namespace SmartDelivery.Modules.MGoods
     {
 
         public Guid Id { get; set; }
-        public Guid? IdReceiver { get; set; }
-        public Guid? IdSender { get; set; }
+        public Guid IdReceiver { get; set; }
+        public Guid IdSender { get; set; }
+        public string Name { get; set; }
+        public int? Status { get; set; }
+        public string AddressRecive { get; set; }
 
         public ICollection<CabinetEntity> cabinetEntities { get; set; }
         public ICollection<ScaleEntity> scaleEntities { get; set; }
@@ -25,6 +28,9 @@ namespace SmartDelivery.Modules.MGoods
             this.Id = good.Id;
             this.IdReceiver = good.IdReceiver;
             this.IdSender = good.IdSender;
+            this.Name = good.Name;
+            this.Status = good.Status;
+            this.AddressRecive = good.AddressRecive;
             foreach(var arg in args)
             {
                 if (arg is ICollection<Cabinet>)
@@ -45,6 +51,9 @@ namespace SmartDelivery.Modules.MGoods
             }
             good.IdReceiver = this.IdReceiver;
             good.IdSender = this.IdSender;
+            good.AddressRecive = this.AddressRecive;
+            good.Name = this.Name;
+            good.Status = this.Status;
             return good;
         }
     }

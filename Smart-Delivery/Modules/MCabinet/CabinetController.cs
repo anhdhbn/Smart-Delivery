@@ -9,8 +9,8 @@ namespace SmartDelivery.Modules.MCabinet
     [Route("api/Cabinet")]
     public class CabinetController : CommonController
     {
-        private CabinetService cabinetService;
-        public CabinetController(CabinetService cabinetService)
+        private ICabinetService cabinetService;
+        public CabinetController(ICabinetService cabinetService)
         {
             this.cabinetService = cabinetService;
         }

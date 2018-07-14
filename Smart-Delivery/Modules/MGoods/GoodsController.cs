@@ -38,10 +38,10 @@ namespace SmartDelivery.Modules.MGoods
             return goodsService.Update(goodsId, goodsEntity);
         }
 
-        [Route("{goodsId}"), HttpGet]
-        public GoodsEntity Delete(Guid goodsId)
+        [Route("{goodsId}"), HttpDelete]
+        public bool Delete(Guid goodsId)
         {
-            return goodsService.Get(goodsId);
+            return goodsService.Delete(goodsId);
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SmartDelivery.Modules.MShipper
 {
-    [Route("api/ShipperEntity")]
+    [Route("api/Shipper")]
     public class CustomerController : CommonController
     {
         private IShipperService shipperService;

@@ -64,5 +64,6 @@ namespace SmartDelivery.Modules.MGoods
             smartDeliveryContext.SaveChanges();
             return goodsEntity;
         }
+
     }
 }
