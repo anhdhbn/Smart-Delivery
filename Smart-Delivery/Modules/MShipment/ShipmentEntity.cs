@@ -16,6 +16,7 @@ namespace SmartDelivery.Modules.MShipment
         public string Name { get; set; }
         public ShipperEntity ShipperEntity { get; set; }
         public ICollection<ShipmentGoodEntity> ShipmentGoodEntities { get; set; }
+        public ShipmentEntity() { }
         public ShipmentEntity(Shipment Shipment, params object[] args)
         {
             this.Id = Shipment.Id;
@@ -28,17 +29,13 @@ namespace SmartDelivery.Modules.MShipment
                     this.ShipmentGoodEntities = (arg as ICollection<ShipmentGoods>).Select(ir => new ShipmentGoodEntity(ir)).ToList();
             }
         }
-        public ShipmentEntity()
-        {
-
-        }
 
         public Shipment ToModel(Shipment shipment = null)
         {
             if (shipment == null)
             {
                 shipment = new Shipment();
-                shipment.Id = new Guid();
+                shipment.Id = Guid.NewGuid();
             }
             shipment.Name = this.Name;
             shipment.ShipperId = this.ShipperId;

@@ -20,7 +20,6 @@ namespace SmartDelivery.Models
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Goods> Goods { get; set; }
-        public virtual DbSet<Hash> Hash { get; set; }
         public virtual DbSet<Repositories> Repositories { get; set; }
         public virtual DbSet<Scale> Scale { get; set; }
         public virtual DbSet<Shipment> Shipment { get; set; }
@@ -55,6 +54,10 @@ namespace SmartDelivery.Models
             modelBuilder.Entity<Cabinet>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.IsHadGoods).HasColumnName("isHadGoods");
+
+                entity.Property(e => e.IsOpended).HasColumnName("isOpended");
 
                 entity.Property(e => e.Name).HasMaxLength(10);
 
@@ -95,30 +98,13 @@ namespace SmartDelivery.Models
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Name).HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<Hash>(entity =>
-            {
-                entity.ToTable("Hash", "HangFire");
-
-                entity.HasIndex(e => new { e.ExpireAt, e.Key })
-                    .HasName("IX_HangFire_Hash_Key");
-
-                entity.HasIndex(e => new { e.Id, e.ExpireAt })
-                    .HasName("IX_HangFire_Hash_ExpireAt");
-
-                entity.HasIndex(e => new { e.Key, e.Field })
-                    .HasName("UX_HangFire_Hash_Key_Field")
-                    .IsUnique();
-
-                entity.Property(e => e.Field)
+                entity.Property(e => e.AddressRecive)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.Key)
+                entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Repositories>(entity =>

@@ -20,7 +20,7 @@ namespace SmartDelivery.Modules.MEmployee
             smartDeliveryContext.User.Add(User);
             smartDeliveryContext.Employee.Add(employee);
             smartDeliveryContext.SaveChanges();
-            return employeeEntity;
+            return new EmployeeEntity(employee);
         }
 
         public bool Delete(Guid employeeId)
@@ -65,7 +65,7 @@ namespace SmartDelivery.Modules.MEmployee
             employeeEntity.ToModel(employee);
             smartDeliveryContext.Employee.Update(employee);
             smartDeliveryContext.SaveChanges();
-            return employeeEntity;
+            return new EmployeeEntity(employee);
         }
     }
 }

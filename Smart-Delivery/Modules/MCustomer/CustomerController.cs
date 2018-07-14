@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SmartDelivery.Modules.MCustomer
 {
-    [Route("api/Shipper")]
+    [Route("api/Customer")]
     public class CustomerController : CommonController
     {
         private ICustomerService shipperService;
@@ -23,22 +23,28 @@ namespace SmartDelivery.Modules.MCustomer
             return shipperService.Create(shipperEntity);
         }
 
-        [Route("{shipperId}"), HttpGet]
-        public CustomerEntity Get(Guid shipperId)
+        [Route("{customerId}"), HttpGet]
+        public CustomerEntity Get(Guid customerId)
         {
-            return shipperService.Get(shipperId);
+            return shipperService.Get(customerId);
         }
 
-        [Route("{shipperId}"), HttpPut]
-        public CustomerEntity Update(Guid shipperId, [FromBody]CustomerEntity shipperEntity)
+        [Route(""), HttpGet]
+        public List<CustomerEntity> Get()
         {
-            return shipperService.Update(shipperId, shipperEntity);
+            return shipperService.Get();
         }
 
-        [Route("{shipperId}"), HttpDelete]
-        public bool Delete(Guid shipperId)
+        [Route("{customerId}"), HttpPut]
+        public CustomerEntity Update(Guid customerId, [FromBody]CustomerEntity shipperEntity)
         {
-            return shipperService.Delete(shipperId);
+            return shipperService.Update(customerId, shipperEntity);
+        }
+
+        [Route("{customerId}"), HttpDelete]
+        public bool Delete(Guid customerId)
+        {
+            return shipperService.Delete(customerId);
         }
     }
 }

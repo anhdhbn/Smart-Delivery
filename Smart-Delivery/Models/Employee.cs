@@ -11,7 +11,6 @@ namespace SmartDelivery.Models
         public string Display { get; set; }
         public string Phone { get; set; }
         public string Picture { get; set; }
-        public long? Cx { get; set; }
 
         public User IdNavigation { get; set; }
     }

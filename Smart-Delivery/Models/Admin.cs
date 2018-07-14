@@ -7,7 +7,6 @@ namespace SmartDelivery.Models
     {
         public Guid Id { get; set; }
         public string Fullname { get; set; }
-        public int? Role { get; set; }
 
         public User IdNavigation { get; set; }
     }

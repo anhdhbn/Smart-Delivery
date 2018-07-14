@@ -14,7 +14,7 @@ namespace SmartDelivery.Modules.MCabinet
             Cabinet cabinet = cabinetEntity.ToModel();
             smartDeliveryContext.Cabinet.Add(cabinet);
             smartDeliveryContext.SaveChanges();
-            return cabinetEntity;
+            return new CabinetEntity(cabinet);
         }
 
         public bool Delete(Guid cabinetId)
@@ -57,7 +57,7 @@ namespace SmartDelivery.Modules.MCabinet
             cabinetEntity.ToModel(cabinet);
             smartDeliveryContext.Cabinet.Update(cabinet);
             smartDeliveryContext.SaveChanges();
-            return cabinetEntity;
+            return new CabinetEntity(cabinet);
         }
     }
 }

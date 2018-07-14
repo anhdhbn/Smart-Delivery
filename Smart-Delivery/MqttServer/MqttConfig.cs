@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MQTTnet;
 using MQTTnet.AspNetCore;
 using MQTTnet.Server;
 using System;
@@ -11,9 +12,11 @@ namespace SmartDelivery.MqttServer
     public class MqttConfig 
     {
         private readonly IMqttServer mqttServer;
-        public MqttConfig(IMqttServer mqttServer)
+        private readonly IMqttClientMain mqttClientMain;
+        public MqttConfig(IMqttServer mqttServer, IMqttClientMain mqttClientMain)
         {
             this.mqttServer = mqttServer;
+            this.mqttClientMain = mqttClientMain;
         }
 
         public void Config()
@@ -29,7 +32,7 @@ namespace SmartDelivery.MqttServer
 
         private void Config_ApplicationMessageReceived()
         {
-            mqttServer.ApplicationMessageReceived += async (sender, e) =>
+            mqttServer.ApplicationMessageReceived += (sender, e) =>
             {
                 string result = System.Text.Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
                 string str = string.Format("Event-ApplicationMessageReceived \n\tFrom: {0} \n\t\tWith topic: {1} \n\t\t\tData sent: {2} \n\t\t\t\tQuality Of Service Level: {3} \n\t\t\t\t\tRetain: ",
@@ -44,7 +47,7 @@ namespace SmartDelivery.MqttServer
 
         private void Config_ClientConnected()
         {
-            mqttServer.ClientConnected += async (sender, e) =>
+            mqttServer.ClientConnected += (sender, e) =>
             {
                 string str = string.Format("Event-ClientConnected: {0}", e.ClientId);
                 Console.WriteLine(str);
@@ -53,7 +56,7 @@ namespace SmartDelivery.MqttServer
         
         private void Config_ClientDisconnected()
         {
-            mqttServer.ClientDisconnected += async (sender, e) =>
+            mqttServer.ClientDisconnected += (sender, e) =>
             {
                 string str = string.Format("Event-ClientDisconnected: {0} ", e.ClientId);
                 Console.WriteLine(str);
@@ -62,17 +65,22 @@ namespace SmartDelivery.MqttServer
 
         private void Config_ClientSubscribedTopic()
         {
-            mqttServer.ClientSubscribedTopic += async (sender, e) =>
+            mqttServer.ClientSubscribedTopic += (sender, e) =>
             {
+                
                 string str = string.Format("Event-ClientSubscribedTopic: \n\tClient: {0}\n\t\tTopic: {1} \n\t\t\tQuality Of Service Level: {2}",
                 e.ClientId, e.TopicFilter.Topic, e.TopicFilter.QualityOfServiceLevel);
                 Console.WriteLine(str);
+                if (e.ClientId == "Main client")
+                    return;
+                mqttClientMain.listTopic.Add(e.TopicFilter.Topic);
+                mqttClientMain.mqttClient.SubscribeAsync(new List<TopicFilter>() { new TopicFilter(e.TopicFilter.Topic, e.TopicFilter.QualityOfServiceLevel) });
             };
         }
 
         private void Config_ClientUnsubscribedTopic()
         {
-            mqttServer.ClientUnsubscribedTopic += async (sender, e) =>
+            mqttServer.ClientUnsubscribedTopic += (sender, e) =>
             {
                 string str = string.Format("Event-ClientUnsubscribedTopic: \n\tClient: {0}\n\t\tTopic: {1}",
                 e.ClientId, e.TopicFilter);
@@ -82,7 +90,7 @@ namespace SmartDelivery.MqttServer
 
         private void Config_Started()
         {
-            mqttServer.Started += async (sender, e) =>
+            mqttServer.Started += (sender, e) =>
             {
                 string str = string.Format("MQTT server has started...");
                 Console.WriteLine(str);
@@ -91,7 +99,7 @@ namespace SmartDelivery.MqttServer
 
         private void Config_Stopped()
         {
-            mqttServer.Stopped += async (sender, e) =>
+            mqttServer.Stopped += (sender, e) =>
             {
                 string str = string.Format("MQTT server has stopped...");
                 Console.WriteLine(str);

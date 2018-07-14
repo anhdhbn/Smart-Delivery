@@ -22,6 +22,7 @@ namespace SmartDelivery.Modules.MCustomer
         public long? Cx { get; set; }
 
         public UserEntity IdNavigation { get; set; }
+        public CustomerEntity() { }
         public CustomerEntity(Customer customer, params object[] args)
         {
             this.Id = customer.Id;
@@ -40,17 +41,12 @@ namespace SmartDelivery.Modules.MCustomer
             }
         }
 
-
-        public CustomerEntity()
-        {
-
-        }
         public Customer ToModel(Customer customer = null)
         {
             if(customer == null)
             {
                 customer = new Customer();
-                customer.Id = new Guid();
+                customer.Id =  Guid.NewGuid();
             }
             customer.Password = this.Password;
             customer.Username = this.Username;

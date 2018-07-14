@@ -13,10 +13,12 @@ namespace SmartDelivery.Models
         }
 
         public Guid Id { get; set; }
-        public Guid? IdReceiver { get; set; }
-        public Guid? IdSender { get; set; }
+        public Guid IdReceiver { get; set; }
+        public Guid IdSender { get; set; }
         public double? Weight { get; set; }
         public string Name { get; set; }
+        public int? Status { get; set; }
+        public string AddressRecive { get; set; }
 
         public ICollection<Cabinet> Cabinet { get; set; }
         public ICollection<Scale> Scale { get; set; }

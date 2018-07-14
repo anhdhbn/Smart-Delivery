@@ -18,7 +18,7 @@ namespace SmartDelivery.Modules.MScale
             Scale scale = scaleEntity.ToModel();
             smartDeliveryContext.Scale.Add(scale);
             smartDeliveryContext.SaveChanges();
-            return scaleEntity;
+            return new ScaleEntity(scale);
         }
 
         public bool Delete(Guid scaleId)
@@ -66,7 +66,7 @@ namespace SmartDelivery.Modules.MScale
             scaleEntity.ToModel(scale);
             smartDeliveryContext.Scale.Update(scale);
             smartDeliveryContext.SaveChanges();
-            return scaleEntity;
+            return new ScaleEntity(scale);
         }
     }
 }

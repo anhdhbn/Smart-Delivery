@@ -44,11 +44,5 @@ namespace SmartDelivery.Modules.MUser
             //Response.Cookies.Append("JWT", token, CookieOptions);
             return token;
         }
-
-        [Route("{userId}"), HttpDelete]
-        public bool Delete(Guid userId)
-        {
-            return userService.Delete(userId);
-        }
     }
 }

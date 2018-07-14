@@ -14,7 +14,7 @@ namespace SmartDelivery.Modules.MRepository
             Repositories repository = repositoryEntity.ToModel();
             smartDeliveryContext.Repositories.Add(repository);
             smartDeliveryContext.SaveChanges();
-            return repositoryEntity;
+            return new RepositoryEntity(repository);
         }
 
         public bool Delete(Guid repositoryId)
@@ -60,7 +60,7 @@ namespace SmartDelivery.Modules.MRepository
             repositoryEntity.ToModel(repository);
             smartDeliveryContext.Repositories.Update(repository);
             smartDeliveryContext.SaveChanges();
-            return repositoryEntity;
+            return new RepositoryEntity(repository);
         }
     }
 }

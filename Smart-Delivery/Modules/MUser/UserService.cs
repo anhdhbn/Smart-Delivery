@@ -10,8 +10,8 @@ namespace SmartDelivery.Modules.MUser
     public class UserService : CommonService, IUserService
     {
         private IJWTHandler JWTHandler;
-         
-        public UserService(IJWTHandler JWTHandler) : base()
+
+        public UserService(IJWTHandler JWTHandler)
         {
             this.JWTHandler = JWTHandler;
         }

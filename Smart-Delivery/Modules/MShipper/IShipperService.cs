@@ -10,8 +10,8 @@ namespace SmartDelivery.Modules.MShipper
 
         ShipperEntity Get(Guid ShipperId);
         List<ShipperEntity> Get();
-        ShipperEntity Create(ShipperEntity ShipmentGoodEntity);
-        ShipperEntity Update(Guid ShipperId, ShipperEntity ShipperEntity);
+        ShipperEntity Create(ShipperEntity shipperEntity);
+        ShipperEntity Update(Guid ShipperId, ShipperEntity shipperEntity);
         bool Delete(Guid ShipperId);
     }
 }

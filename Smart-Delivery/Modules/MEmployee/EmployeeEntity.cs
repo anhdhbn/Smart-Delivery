@@ -15,13 +15,14 @@ namespace SmartDelivery.Modules.MEmployee
         public string Display { get; set; }
         public string Phone { get; set; }
         public string Picture { get; set; }
-        public long? Cx { get; set; }
+        
 
         public UserEntity IdNavigation { get; set; }
+        public EmployeeEntity() { }
 
         public EmployeeEntity(Employee employee, params object[] args)
         {
-            this.Cx = employee.Cx;
+           
             this.Id = employee.Id;
             this.Display = employee.Display;
             this.Username = employee.Username;
@@ -33,24 +34,19 @@ namespace SmartDelivery.Modules.MEmployee
                 if (arg is UserEntity) this.IdNavigation = employee.IdNavigation == null ? null : new UserEntity(arg as User);
             }
         }
-
-        public EmployeeEntity()
-        {
-
-        }
         public Employee ToModel(Employee employee = null)
         {
             if(employee == null)
             {
                 employee = new Employee();
-                employee.Id = new Guid();
+                employee.Id =  Guid.NewGuid();
             }
             employee.Username = this.Username;
             employee.Password = this.Password;
             employee.Phone = this.Phone;
             employee.Picture = this.Picture;
             employee.Display = this.Display;
-            employee.Cx = this.Cx;
+          
             return employee;
         }
     }

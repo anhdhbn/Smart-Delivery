@@ -3,43 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SmartDelivery.Modules.MCustomer;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SmartDelivery.Modules.MShipper
 {
-    [Route("api/Customer")]
+    [Route("api/Shipper")]
     public class CustomerController : CommonController
     {
-        private IShipperService shipperrService;
-        public CustomerController(IShipperService shipperrService)
+        private IShipperService shipperService;
+        public CustomerController(IShipperService shipperService)
         {
-            this.shipperrService = shipperrService;
+            this.shipperService = shipperService;
         }
 
         [Route(""), HttpPost]
         public ShipperEntity Create([FromBody]ShipperEntity customerEntity)
         {
-            return shipperrService.Create(customerEntity);
+            return shipperService.Create(customerEntity);
         }
 
-        [Route("{customerId}"), HttpGet]
-        public ShipperEntity Get(Guid customerId)
+        [Route("{shipperId}"), HttpGet]
+        public ShipperEntity Get(Guid shipperId)
         {
-            return shipperrService.Get(customerId);
+            return shipperService.Get(shipperId);
         }
 
-        [Route("{customerId}"), HttpPut]
-        public ShipperEntity Update(Guid customerId, [FromBody]ShipperEntity shipperEntity)
+        [Route("{shipperId}"), HttpPut]
+        public ShipperEntity Update(Guid shipperId, [FromBody]ShipperEntity shipperEntity)
         {
-            return shipperrService.Update(customerId, shipperEntity);
+            return shipperService.Update(shipperId, shipperEntity);
         }
 
         [Route("{customerId}"), HttpDelete]
-        public bool Delete(Guid customerId)
+        public bool Delete(Guid shipperId)
         {
-            return shipperrService.Delete(customerId);
+            return shipperService.Delete(shipperId);
         }
     }
 }

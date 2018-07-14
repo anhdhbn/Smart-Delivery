@@ -21,7 +21,7 @@ namespace SmartDelivery.Modules.MCustomer
             smartDeliveryContext.User.Add(User);
             smartDeliveryContext.Customer.Add(customer);
             smartDeliveryContext.SaveChanges();
-            return customerEntity;
+            return new CustomerEntity(customer);
         }
 
         public bool Delete(Guid CustomerId)
@@ -71,7 +71,7 @@ namespace SmartDelivery.Modules.MCustomer
             customerEntity.ToModel(customer);
             smartDeliveryContext.Customer.Update(customer);
             smartDeliveryContext.SaveChanges();
-            return customerEntity;
+            return new CustomerEntity(customer);
         }
     }
 }

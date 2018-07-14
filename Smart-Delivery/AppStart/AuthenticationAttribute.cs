@@ -104,8 +104,8 @@ namespace SmartDelivery
 
         private bool checkAuth(string path)
         {
-            List<string> list = new List<string>() { "/", "/api/User/Login", "/api/Test", "/api/Scale"};
-            List<string> list2 = new List<string>() { "/api/Scale" , "/api"};
+            List<string> list = new List<string>() { "/", "/api/User/Login", "/api/Test"};
+            List<string> list2 = new List<string>() { "/api", "/Demo"};
             foreach (string item in list)
             {
                 if (path.ToLower() == item.ToLower())

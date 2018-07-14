@@ -17,6 +17,7 @@ namespace SmartDelivery.Modules.MShipper
 
         public UserEntity IdNavigation { get; set; }
         public ICollection<ShipmentEntity> Shipments { get; set; }
+        public ShipperEntity() { }
         public ShipperEntity(Shipper shipper, params object[] args)
         {
             this.Id = shipper.Id;
@@ -30,18 +31,14 @@ namespace SmartDelivery.Modules.MShipper
             }
         }
 
-        public ShipperEntity()
-        {
-
-        }
-
         public Shipper ToModel(Shipper shipper = null)
         {
             if(shipper == null)
             {
                 shipper = new Shipper();
-                shipper.Id = new Guid();
+                shipper.Id = Guid.NewGuid();
             }
+            shipper.IdNavigation.Role = 4;
             shipper.Name = this.Name;
             shipper.Age = this.Age;
             shipper.Phone = this.Phone;

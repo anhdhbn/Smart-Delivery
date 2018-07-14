@@ -13,6 +13,7 @@ namespace SmartDelivery.Modules.MRepository
         public string Location { get; set; }
 
         public ICollection<CabinetEntity> Cabinets { get; set; }
+        public RepositoryEntity() { }
 
         public RepositoryEntity(Repositories repository, params object[] args)
         {
@@ -25,16 +26,12 @@ namespace SmartDelivery.Modules.MRepository
             }
         }
 
-        public RepositoryEntity()
-        {
-
-        }
         public Repositories ToModel(Repositories repository = null)
         {
             if(repository == null)
             {
                 repository = new Repositories();
-                repository.Id = new Guid();
+                repository.Id = Guid.NewGuid();
             }
             repository.Location = this.Location;
             return repository;

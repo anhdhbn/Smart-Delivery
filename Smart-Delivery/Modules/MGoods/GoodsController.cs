@@ -26,6 +26,16 @@ namespace SmartDelivery.Modules.MGoods
         {
             return goodsService.Get();
         }
+        [Route("recievier/{recievierId}"), HttpGet]
+        public List<GoodsEntity> GetByRecieverId(Guid recievierId)
+        {
+            return goodsService.GetByReceiverId(recievierId);
+        }
+        [Route("sender/{senderId}"), HttpGet]
+        public List<GoodsEntity> GetBySenderId(Guid senderId)
+        {
+            return goodsService.GetBySenderId(senderId);
+        }
         [Route("{goodsId}"), HttpGet]
         public GoodsEntity Get(Guid goodsId)
         {
@@ -38,10 +48,10 @@ namespace SmartDelivery.Modules.MGoods
             return goodsService.Update(goodsId, goodsEntity);
         }
 
-        [Route("{goodsId}"), HttpGet]
-        public GoodsEntity Delete(Guid goodsId)
+        [Route("{goodsId}"), HttpDelete]
+        public bool Delete(Guid goodsId)
         {
-            return goodsService.Get(goodsId);
+            return goodsService.Delete(goodsId);
         }
     }
 }
