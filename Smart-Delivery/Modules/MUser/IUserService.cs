@@ -10,5 +10,7 @@ namespace SmartDelivery.Modules.MUser
         UserEntity Get(Guid UserId);
         UserEntity Create(UserEntity UserEntity);
         string Login(UserEntity UserEntity);
+        List<UserEntity> Get();
+        bool Delete(Guid UserId);
     }
 }

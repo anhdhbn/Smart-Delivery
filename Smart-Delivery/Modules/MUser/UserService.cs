@@ -18,7 +18,7 @@ namespace SmartDelivery.Modules.MUser
 
         public UserEntity Get(Guid UserId)
         {
-            User User = smartDeliveryContext.Users
+            User User = smartDeliveryContext.User
                 .Include(x => x.Admin)
                 .Include(x => x.Customer)
                 .Include(x => x.Employee)
@@ -35,7 +35,7 @@ namespace SmartDelivery.Modules.MUser
                 throw new BadRequestException("Bạn chưa điền Username");
             if (string.IsNullOrEmpty(UserEntity.Password))
                 throw new BadRequestException("Bạn chưa điền Password");
-            User User = smartDeliveryContext.Users
+            User User = smartDeliveryContext.User
                 .Include(x=>x.Admin)
                 .Include(x=>x.Customer)
                 .Include(x=>x.Employee)
@@ -47,7 +47,7 @@ namespace SmartDelivery.Modules.MUser
                 User.Id = Guid.NewGuid();
                 User.Username = UserEntity.Username;
 
-                smartDeliveryContext.Users.Add(User);
+                smartDeliveryContext.User.Add(User);
             }
             User.Password = (UserEntity.Password);
             smartDeliveryContext.SaveChanges();
@@ -64,7 +64,7 @@ namespace SmartDelivery.Modules.MUser
             if (string.IsNullOrEmpty(UserEntity.Password))
                 throw new BadRequestException("Bạn chưa điền Password");
 
-            User User = smartDeliveryContext.Users
+            User User = smartDeliveryContext.User
                 .Include(x => x.Admin)
                 .Include(x => x.Customer)
                 .Include(x => x.Employee)
@@ -81,6 +81,20 @@ namespace SmartDelivery.Modules.MUser
             return JWTHandler.CreateToken(UserEntity, Helpper.expires);
         }
 
-        
+        public List<UserEntity> Get()
+        {
+            IQueryable<User> users = smartDeliveryContext.User;
+            return users.Select(u => new UserEntity(u)).ToList();
+        }
+
+        public bool Delete(Guid UserId)
+        {
+            User user = smartDeliveryContext.User.Where(u => u.Id == UserId).FirstOrDefault();
+            if (user == null)
+                throw new BadRequestException("User khong ton tai");
+            smartDeliveryContext.User.Remove(user);
+            smartDeliveryContext.SaveChanges();
+            return true;
+        }
     }
 }
