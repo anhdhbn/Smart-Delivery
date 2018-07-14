@@ -71,7 +71,7 @@ namespace SmartDelivery.Modules.MCustomer
             customerEntity.ToModel(customer);
             smartDeliveryContext.Customer.Update(customer);
             smartDeliveryContext.SaveChanges();
-            return customerEntity;
+            return new CustomerEntity(customer);
         }
     }
 }

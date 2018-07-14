@@ -65,7 +65,7 @@ namespace SmartDelivery.Modules.MEmployee
             employeeEntity.ToModel(employee);
             smartDeliveryContext.Employee.Update(employee);
             smartDeliveryContext.SaveChanges();
-            return employeeEntity;
+            return new EmployeeEntity(employee);
         }
     }
 }

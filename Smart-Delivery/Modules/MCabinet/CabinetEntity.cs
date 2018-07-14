@@ -11,11 +11,12 @@ namespace SmartDelivery.Modules.MCabinet
     public class CabinetEntity
     {
         public Guid Id { get; set; }
-        public int? Status { get; set; }
+        public bool? IsOpended { get; set; }
         public Guid? GoodsId { get; set; }
         public Guid Code { get; set; }
         public Guid? LocationId { get; set; }
         public string Name { get; set; }
+        public bool? IsHadGoods { get; set; }
 
         public GoodsEntity Goods { get; set; }
         public RepositoryEntity Location { get; set; }
@@ -24,7 +25,8 @@ namespace SmartDelivery.Modules.MCabinet
         public CabinetEntity(Cabinet cabinet, params object[] args)
         {
             this.Id = cabinet.Id;
-            this.Status = cabinet.Status;
+            this.IsHadGoods = cabinet.IsHadGoods;
+            this.IsOpended = cabinet.IsOpended;
             this.GoodsId = cabinet.GoodsId;
             this.Code = cabinet.Code;
             this.LocationId = cabinet.LocationId;
@@ -43,7 +45,8 @@ namespace SmartDelivery.Modules.MCabinet
                 cabinet = new Cabinet();
                 cabinet.Id = Guid.NewGuid();
             }
-            cabinet.Status = this.Status;
+            cabinet.IsOpended = this.IsOpended;
+            cabinet.IsHadGoods = this.IsHadGoods;
             cabinet.Name = this.Name;
             cabinet.GoodsId = this.GoodsId;
             cabinet.Code = this.Code;

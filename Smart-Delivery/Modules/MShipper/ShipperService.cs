@@ -21,7 +21,7 @@ namespace SmartDelivery.Modules.MShipper
             smartDeliveryContext.User.Add(User);
             smartDeliveryContext.Shipper.Add(shipper);
             smartDeliveryContext.SaveChanges();
-            return shipperEntity;
+            return new ShipperEntity(shipper);
         }
 
         public bool Delete(Guid ShipperId)
@@ -71,7 +71,7 @@ namespace SmartDelivery.Modules.MShipper
             ShipperEntity.ToModel(shipper);
             smartDeliveryContext.Shipper.Update(shipper);
             smartDeliveryContext.SaveChanges();
-            return ShipperEntity;
+            return new ShipperEntity(shipper);
         }
     }
 }

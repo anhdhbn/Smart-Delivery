@@ -80,7 +80,7 @@ namespace SmartDelivery.Modules.MGoods
             goodsEntity.ToModel(good);
             smartDeliveryContext.Goods.Update(good);
             smartDeliveryContext.SaveChanges();
-            return goodsEntity;
+            return new GoodsEntity(good);
         }
 
     }

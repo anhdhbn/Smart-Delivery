@@ -60,7 +60,7 @@ namespace SmartDelivery.Modules.MRepository
             repositoryEntity.ToModel(repository);
             smartDeliveryContext.Repositories.Update(repository);
             smartDeliveryContext.SaveChanges();
-            return repositoryEntity;
+            return new RepositoryEntity(repository);
         }
     }
 }

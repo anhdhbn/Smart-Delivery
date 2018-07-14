@@ -60,7 +60,7 @@ namespace SmartDelivery.Modules.MShipment
             ShipmentEntity.ToModel(shipments);
             smartDeliveryContext.Shipment.Update(shipments);
             smartDeliveryContext.SaveChanges();
-            return ShipmentEntity;
+            return new ShipmentEntity(shipments);
         }
     }
 }

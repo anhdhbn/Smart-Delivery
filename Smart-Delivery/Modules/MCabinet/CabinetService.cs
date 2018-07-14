@@ -57,7 +57,7 @@ namespace SmartDelivery.Modules.MCabinet
             cabinetEntity.ToModel(cabinet);
             smartDeliveryContext.Cabinet.Update(cabinet);
             smartDeliveryContext.SaveChanges();
-            return cabinetEntity;
+            return new CabinetEntity(cabinet);
         }
     }
 }

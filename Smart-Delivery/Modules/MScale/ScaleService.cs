@@ -66,7 +66,7 @@ namespace SmartDelivery.Modules.MScale
             scaleEntity.ToModel(scale);
             smartDeliveryContext.Scale.Update(scale);
             smartDeliveryContext.SaveChanges();
-            return scaleEntity;
+            return new ScaleEntity(scale);
         }
     }
 }

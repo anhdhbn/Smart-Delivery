@@ -67,7 +67,7 @@ namespace SmartDelivery.Modules.MShipmentGood
             ShipmentGoodEntity.ToModel(shipmentGood);
             smartDeliveryContext.ShipmentGoods.Update(shipmentGood);
             smartDeliveryContext.SaveChanges();
-            return ShipmentGoodEntity;
+            return new ShipmentGoodEntity(shipmentGood);
         }
     }
 }
