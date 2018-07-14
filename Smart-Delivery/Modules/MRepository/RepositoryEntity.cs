@@ -25,6 +25,10 @@ namespace SmartDelivery.Modules.MRepository
             }
         }
 
+        public RepositoryEntity()
+        {
+
+        }
         public Repositories ToModel(Repositories repository = null)
         {
             if(repository == null)

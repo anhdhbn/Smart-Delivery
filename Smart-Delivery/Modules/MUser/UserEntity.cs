@@ -15,12 +15,17 @@ namespace SmartDelivery.Modules.MUser
 
         public UserEntity(User user)
         {
-            if (user == null) return;
+            //if (user == null) return;
             this.Id = user.Id;
             this.Username = user.Username;
             this.Password = user.Password;
             this.Role = ROLES.USER;
             if (user.Admin != null) this.Role = ROLES.ADMIN | ROLES.USER;
+        }
+
+        public UserEntity()
+        {
+
         }
     }
 }

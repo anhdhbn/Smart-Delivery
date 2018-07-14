@@ -17,6 +17,11 @@ namespace SmartDelivery.Modules.MShipmentGood
         public GoodsEntity Goods { get; set; }
         public ShipmentEntity Shipment { get; set; }
 
+
+        public ShipmentGoodEntity()
+        {
+
+        }
         public ShipmentGoodEntity(ShipmentGoods shipmentGood, params object[] args)
         {
             this.Id = shipmentGood.Id;

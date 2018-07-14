@@ -34,7 +34,10 @@ namespace SmartDelivery.Modules.MCabinet
                 if (arg is Repositories) this.Location = cabinet.Location == null ? null : new RepositoryEntity(arg as Repositories);
             }
         }
+        public CabinetEntity()
+        {
 
+        }
         public Cabinet ToModel(Cabinet cabinet = null)
         {
             if(cabinet == null)

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace SmartDelivery.Modules.MShipper
 {
-    public class CustomerService : CommonService, ICustomerService
+    public class ShipperService : CommonService, IShipperService
     {
-        public CustomerEntity Create(CustomerEntity shipperEntity)
+        public ShipperEntity Create(ShipperEntity shipperEntity)
         {
             Shipper shipper = shipperEntity.ToModel();
             User User = new User();
@@ -40,7 +40,7 @@ namespace SmartDelivery.Modules.MShipper
             return true;
         }
 
-        public CustomerEntity Get(Guid ShipperId)
+        public ShipperEntity Get(Guid ShipperId)
         {
             Shipper shipper = smartDeliveryContext.Shipper.Where(m => m.Id == ShipperId)
                .Include(u => u.IdNavigation)
@@ -49,17 +49,17 @@ namespace SmartDelivery.Modules.MShipper
             {
                 throw new BadRequestException("Shipper khong ton tai");
             }
-            return new CustomerEntity(shipper, shipper.IdNavigation);
+            return new ShipperEntity(shipper, shipper.IdNavigation);
         }
 
-        public List<CustomerEntity> Get()
+        public List<ShipperEntity> Get()
         {
             IQueryable<Shipper> shippers = smartDeliveryContext.Shipper
             .Include(m => m.IdNavigation);
-            return shippers.Select(u => new CustomerEntity(u,u.IdNavigation)).ToList();
+            return shippers.Select(u => new ShipperEntity(u,u.IdNavigation)).ToList();
         }
 
-        public CustomerEntity Update(Guid ShipperId, CustomerEntity ShipperEntity)
+        public ShipperEntity Update(Guid ShipperId, ShipperEntity ShipperEntity)
         {
             Shipper shipper = smartDeliveryContext.Shipper.Where(m => m.Id == ShipperId)
                .Include(u => u.IdNavigation)

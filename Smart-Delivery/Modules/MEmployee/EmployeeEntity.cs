@@ -33,6 +33,11 @@ namespace SmartDelivery.Modules.MEmployee
                 if (arg is UserEntity) this.IdNavigation = employee.IdNavigation == null ? null : new UserEntity(arg as User);
             }
         }
+
+        public EmployeeEntity()
+        {
+
+        }
         public Employee ToModel(Employee employee = null)
         {
             if(employee == null)

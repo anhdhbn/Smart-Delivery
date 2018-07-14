@@ -35,7 +35,10 @@ namespace SmartDelivery.Modules.MGoods
                     this.shipmentGoodEntities = (arg as ICollection<ShipmentGoods>).Select(u => new ShipmentGoodEntity(u)).ToList();
             }
         }
+        public GoodsEntity()
+        {
 
+        }
         public Goods ToModel(Goods good = null)
         {
             if(good == null)

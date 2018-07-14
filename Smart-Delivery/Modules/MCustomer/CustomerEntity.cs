@@ -40,6 +40,11 @@ namespace SmartDelivery.Modules.MCustomer
             }
         }
 
+
+        public CustomerEntity()
+        {
+
+        }
         public Customer ToModel(Customer customer = null)
         {
             if(customer == null)
