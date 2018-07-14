@@ -15,14 +15,14 @@ namespace SmartDelivery.Modules.MEmployee
         public string Display { get; set; }
         public string Phone { get; set; }
         public string Picture { get; set; }
-        public long? Cx { get; set; }
+        
 
         public UserEntity IdNavigation { get; set; }
         public EmployeeEntity() { }
 
         public EmployeeEntity(Employee employee, params object[] args)
         {
-            this.Cx = employee.Cx;
+           
             this.Id = employee.Id;
             this.Display = employee.Display;
             this.Username = employee.Username;
@@ -46,7 +46,7 @@ namespace SmartDelivery.Modules.MEmployee
             employee.Phone = this.Phone;
             employee.Picture = this.Picture;
             employee.Display = this.Display;
-            employee.Cx = this.Cx;
+          
             return employee;
         }
     }
