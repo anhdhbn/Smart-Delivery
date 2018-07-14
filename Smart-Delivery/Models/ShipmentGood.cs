@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Smart-Delivery.Models
+namespace SmartDelivery.Models
 {
     public partial class ShipmentGood
     {
