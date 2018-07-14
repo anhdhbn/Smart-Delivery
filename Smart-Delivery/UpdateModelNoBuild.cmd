@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold  "data source=den1.mssql2.gear.host;initial catalog=SmartDelivery;persist security info=True;user id=smartdelivery;password=smartdelivery^^;multipleactiveresultsets=True;" Microsoft.EntityFrameworkCore.SqlServer  -o Models -f --no-build 
