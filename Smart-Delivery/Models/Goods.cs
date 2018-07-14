@@ -19,6 +19,7 @@ namespace SmartDelivery.Models
         public string Name { get; set; }
         public int? Status { get; set; }
         public string AddressRecive { get; set; }
+        public string Code { get; set; }
 
         public ICollection<Cabinet> Cabinet { get; set; }
         public ICollection<Scale> Scale { get; set; }

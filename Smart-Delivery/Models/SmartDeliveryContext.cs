@@ -102,6 +102,8 @@ namespace SmartDelivery.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.Code).HasMaxLength(10);
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -119,6 +121,8 @@ namespace SmartDelivery.Models
             modelBuilder.Entity<Scale>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Code).HasMaxLength(10);
 
                 entity.HasOne(d => d.Goods)
                     .WithMany(p => p.Scale)
