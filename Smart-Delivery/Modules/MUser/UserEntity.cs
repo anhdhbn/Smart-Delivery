@@ -12,6 +12,7 @@ namespace SmartDelivery.Modules.MUser
         public string Username { get; set; }
         public string Password { get; set; }
         public ROLES Role { get; set; }
+        public UserEntity() { }
 
         public UserEntity(User user)
         {

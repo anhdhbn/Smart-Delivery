@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartDelivery.Modules.MShipper
 {
-    public class CustomerEntity
+    public class ShipperEntity
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -17,7 +17,8 @@ namespace SmartDelivery.Modules.MShipper
 
         public UserEntity IdNavigation { get; set; }
         public ICollection<ShipmentEntity> Shipments { get; set; }
-        public CustomerEntity(Shipper shipper, params object[] args)
+        public ShipperEntity() { }
+        public ShipperEntity(Shipper shipper, params object[] args)
         {
             this.Id = shipper.Id;
             this.Name = shipper.Name;
@@ -35,7 +36,7 @@ namespace SmartDelivery.Modules.MShipper
             if(shipper == null)
             {
                 shipper = new Shipper();
-                shipper.Id = new Guid();
+                shipper.Id = Guid.NewGuid();
             }
             shipper.Name = this.Name;
             shipper.Age = this.Age;

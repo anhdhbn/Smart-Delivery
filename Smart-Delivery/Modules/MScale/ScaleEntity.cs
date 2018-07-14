@@ -14,6 +14,7 @@ namespace SmartDelivery.Modules.MScale
         public double Weight { get; set; }
 
         public GoodsEntity GoodsEntity { get; set; }
+        public ScaleEntity() { }
 
         public ScaleEntity(Scale scale, params object[] args)
         {
@@ -31,9 +32,9 @@ namespace SmartDelivery.Modules.MScale
             if(scale == null)
             {
                 scale = new Scale();
-                scale.Id = new Guid();
+                scale.Id = Guid.NewGuid();
             }
-            scale.Id = this.Id;
+            scale.Id = new Guid();
             scale.GoodsId = this.GoodsId;
             scale.Weight = this.Weight;
             return scale;

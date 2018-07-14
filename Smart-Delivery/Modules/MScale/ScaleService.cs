@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace SmartDelivery.Modules.MScale
 {
-    public class OlderService : CommonService, IScaleService
+    public class ScaleService : CommonService, IScaleService
     {
+        public ScaleService() : base()
+        {
+
+        }
         public ScaleEntity Create(ScaleEntity scaleEntity)
         {
             Scale scale = scaleEntity.ToModel();

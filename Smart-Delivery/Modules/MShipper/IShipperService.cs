@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace SmartDelivery.Modules.MShipper
 {
-    public interface ICustomerService : ITransientService
+    public interface IShipperService : ITransientService
     {
 
-        CustomerEntity Get(Guid ShipperId);
-        List<CustomerEntity> Get();
-        CustomerEntity Create(CustomerEntity ShipmentGoodEntity);
-        CustomerEntity Update(Guid ShipperId, CustomerEntity ShipperEntity);
+        ShipperEntity Get(Guid ShipperId);
+        List<ShipperEntity> Get();
+        ShipperEntity Create(ShipperEntity shipperEntity);
+        ShipperEntity Update(Guid ShipperId, ShipperEntity shipperEntity);
         bool Delete(Guid ShipperId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SmartDelivery.Models;
+using SmartDelivery.Modules.MCustomer;
 using SmartDelivery.Modules.MShipmentGood;
 using SmartDelivery.Modules.MShipper;
 using System;
@@ -13,8 +14,9 @@ namespace SmartDelivery.Modules.MShipment
         public Guid Id { get; set; }
         public Guid ShipperId { get; set; }
         public string Name { get; set; }
-        public CustomerEntity ShipperEntity { get; set; }
+        public ShipperEntity ShipperEntity { get; set; }
         public ICollection<ShipmentGoodEntity> ShipmentGoodEntities { get; set; }
+        public ShipmentEntity() { }
         public ShipmentEntity(Shipment Shipment, params object[] args)
         {
             this.Id = Shipment.Id;
@@ -22,7 +24,7 @@ namespace SmartDelivery.Modules.MShipment
             this.Name = Shipment.Name;
             foreach (var arg in args)
             {
-                if (arg is Shipper) this.ShipperEntity = Shipment.Shipper == null ? null : new CustomerEntity(arg as Shipper);
+                if (arg is Shipper) this.ShipperEntity = Shipment.Shipper == null ? null : new ShipperEntity(arg as Shipper);
                 if (arg is ICollection<ShipmentGoods>)
                     this.ShipmentGoodEntities = (arg as ICollection<ShipmentGoods>).Select(ir => new ShipmentGoodEntity(ir)).ToList();
             }
@@ -33,7 +35,7 @@ namespace SmartDelivery.Modules.MShipment
             if (shipment == null)
             {
                 shipment = new Shipment();
-                shipment.Id = new Guid();
+                shipment.Id = Guid.NewGuid();
             }
             shipment.Name = this.Name;
             shipment.ShipperId = this.ShipperId;

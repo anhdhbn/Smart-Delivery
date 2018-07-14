@@ -18,6 +18,7 @@ namespace SmartDelivery.Modules.MEmployee
         public long? Cx { get; set; }
 
         public UserEntity IdNavigation { get; set; }
+        public EmployeeEntity() { }
 
         public EmployeeEntity(Employee employee, params object[] args)
         {
@@ -38,7 +39,7 @@ namespace SmartDelivery.Modules.MEmployee
             if(employee == null)
             {
                 employee = new Employee();
-                employee.Id = new Guid();
+                employee.Id =  Guid.NewGuid();
             }
             employee.Username = this.Username;
             employee.Password = this.Password;

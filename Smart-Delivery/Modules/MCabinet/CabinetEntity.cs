@@ -19,6 +19,7 @@ namespace SmartDelivery.Modules.MCabinet
 
         public GoodsEntity Goods { get; set; }
         public RepositoryEntity Location { get; set; }
+        public CabinetEntity() { }
 
         public CabinetEntity(Cabinet cabinet, params object[] args)
         {
@@ -40,7 +41,7 @@ namespace SmartDelivery.Modules.MCabinet
             if(cabinet == null)
             {
                 cabinet = new Cabinet();
-                cabinet.Id = new Guid();
+                cabinet.Id = Guid.NewGuid();
             }
             cabinet.Status = this.Status;
             cabinet.Name = this.Name;

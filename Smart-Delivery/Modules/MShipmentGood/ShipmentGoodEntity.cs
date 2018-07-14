@@ -16,7 +16,7 @@ namespace SmartDelivery.Modules.MShipmentGood
 
         public GoodsEntity Goods { get; set; }
         public ShipmentEntity Shipment { get; set; }
-
+        public ShipmentGoodEntity() { }
         public ShipmentGoodEntity(ShipmentGoods shipmentGood, params object[] args)
         {
             this.Id = shipmentGood.Id;
@@ -34,7 +34,7 @@ namespace SmartDelivery.Modules.MShipmentGood
             if(shipmentGood == null)
             {
                 shipmentGood = new ShipmentGoods();
-                shipmentGood.Id = new Guid();
+                shipmentGood.Id = Guid.NewGuid();
             }
             shipmentGood.GoodsId = this.GoodsId;
             shipmentGood.ShipmentId = this.ShipmentId;

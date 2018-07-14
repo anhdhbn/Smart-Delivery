@@ -8,37 +8,37 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SmartDelivery.Modules.MShipper
 {
-    [Route("api/Customer")]
+    [Route("api/ShipperEntity")]
     public class CustomerController : CommonController
     {
-        private ICustomerService customerService;
-        public CustomerController(ICustomerService customerService)
+        private IShipperService shipperService;
+        public CustomerController(IShipperService shipperService)
         {
-            this.customerService = customerService;
+            this.shipperService = shipperService;
         }
 
         [Route(""), HttpPost]
-        public CustomerEntity Create([FromBody]CustomerEntity customerEntity)
+        public ShipperEntity Create([FromBody]ShipperEntity customerEntity)
         {
-            return customerService.Create(customerEntity);
+            return shipperService.Create(customerEntity);
         }
 
-        [Route("{customerId}"), HttpGet]
-        public CustomerEntity Get(Guid customerId)
+        [Route("{shipperId}"), HttpGet]
+        public ShipperEntity Get(Guid shipperId)
         {
-            return customerService.Get(customerId);
+            return shipperService.Get(shipperId);
         }
 
-        [Route("{customerId}"), HttpPut]
-        public CustomerEntity Update(Guid customerId, [FromBody]CustomerEntity shipperEntity)
+        [Route("{shipperId}"), HttpPut]
+        public ShipperEntity Update(Guid shipperId, [FromBody]ShipperEntity shipperEntity)
         {
-            return customerService.Update(customerId, shipperEntity);
+            return shipperService.Update(shipperId, shipperEntity);
         }
 
         [Route("{customerId}"), HttpDelete]
-        public bool Delete(Guid customerId)
+        public bool Delete(Guid shipperId)
         {
-            return customerService.Delete(customerId);
+            return shipperService.Delete(shipperId);
         }
     }
 }
