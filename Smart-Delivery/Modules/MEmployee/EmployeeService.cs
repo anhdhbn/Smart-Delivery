@@ -17,31 +17,31 @@ namespace SmartDelivery.Modules.MEmployee
             User.Id = employee.Id;
             User.Username = employeeEntity.Username;
             User.Password = "12345abcd";
-            smartDeliveryContext.Users.Add(User);
-            smartDeliveryContext.Employees.Add(employee);
+            smartDeliveryContext.User.Add(User);
+            smartDeliveryContext.Employee.Add(employee);
             smartDeliveryContext.SaveChanges();
             return employeeEntity;
         }
 
         public bool Delete(Guid employeeId)
         {
-            Employee employee = smartDeliveryContext.Employees.Where(m => m.Id == employeeId)
+            Employee employee = smartDeliveryContext.Employee.Where(m => m.Id == employeeId)
                 .Include(u => u.IdNavigation)
                 .FirstOrDefault();
-            User user = smartDeliveryContext.Users.Where(m => m.Id == employeeId).FirstOrDefault();
+            User user = smartDeliveryContext.User.Where(m => m.Id == employeeId).FirstOrDefault();
             if (employee == null)
             {
                 throw new BadRequestException("Employee khong ton tai");
             }
-            smartDeliveryContext.Users.Remove(user);
-            smartDeliveryContext.Employees.Remove(employee);
+            smartDeliveryContext.User.Remove(user);
+            smartDeliveryContext.Employee.Remove(employee);
             smartDeliveryContext.SaveChanges();
             return true;
         }
 
         public EmployeeEntity Get(Guid employeeId)
         {
-            Employee employee = smartDeliveryContext.Employees.Where(m => m.Id == employeeId)
+            Employee employee = smartDeliveryContext.Employee.Where(m => m.Id == employeeId)
                    .Include(m => m.IdNavigation) 
                    .FirstOrDefault();
             if (employee == null)
@@ -52,18 +52,18 @@ namespace SmartDelivery.Modules.MEmployee
         public List<EmployeeEntity> Get()
         {
 
-            IQueryable<Employee> employees = smartDeliveryContext.Employees
+            IQueryable<Employee> employees = smartDeliveryContext.Employee
            .Include(m => m.IdNavigation);
             return employees.Select(u => new EmployeeEntity(u, u.IdNavigation)).ToList();
         }
 
         public EmployeeEntity Update(Guid employeeId, EmployeeEntity employeeEntity)
         {
-            Employee employee = smartDeliveryContext.Employees.Where(m => m.Id == employeeId).FirstOrDefault();
+            Employee employee = smartDeliveryContext.Employee.Where(m => m.Id == employeeId).FirstOrDefault();
             if (employee == null)
                 throw new BadRequestException("Employee khong ton tai");
             employeeEntity.ToModel(employee);
-            smartDeliveryContext.Employees.Update(employee);
+            smartDeliveryContext.Employee.Update(employee);
             smartDeliveryContext.SaveChanges();
             return employeeEntity;
         }

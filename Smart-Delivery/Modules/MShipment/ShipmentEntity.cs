@@ -23,8 +23,8 @@ namespace SmartDelivery.Modules.MShipment
             foreach (var arg in args)
             {
                 if (arg is Shipper) this.ShipperEntity = Shipment.Shipper == null ? null : new CustomerEntity(arg as Shipper);
-                if (arg is ICollection<ShipmentGood>)
-                    this.ShipmentGoodEntities = (arg as ICollection<ShipmentGood>).Select(ir => new ShipmentGoodEntity(ir)).ToList();
+                if (arg is ICollection<ShipmentGoods>)
+                    this.ShipmentGoodEntities = (arg as ICollection<ShipmentGoods>).Select(ir => new ShipmentGoodEntity(ir)).ToList();
             }
         }
 

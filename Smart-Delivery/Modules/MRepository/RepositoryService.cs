@@ -11,7 +11,7 @@ namespace SmartDelivery.Modules.MRepository
     {
         public RepositoryEntity Create(RepositoryEntity repositoryEntity)
         {
-            Repository repository = repositoryEntity.ToModel();
+            Repositories repository = repositoryEntity.ToModel();
             smartDeliveryContext.Repositories.Add(repository);
             smartDeliveryContext.SaveChanges();
             return repositoryEntity;
@@ -19,8 +19,8 @@ namespace SmartDelivery.Modules.MRepository
 
         public bool Delete(Guid repositoryId)
         {
-            Repository repository = smartDeliveryContext.Repositories.Where(m => m.Id == repositoryId)
-               .Include(u => u.Cabinets)
+            Repositories repository = smartDeliveryContext.Repositories.Where(m => m.Id == repositoryId)
+               .Include(u => u.Cabinet)
                .FirstOrDefault();
             if (repository == null)
             {
@@ -33,27 +33,27 @@ namespace SmartDelivery.Modules.MRepository
 
         public RepositoryEntity Get(Guid repositoryId)
         {
-            Repository repository = smartDeliveryContext.Repositories.Where(m => m.Id == repositoryId)
-               .Include(u => u.Cabinets)
+            Repositories repository = smartDeliveryContext.Repositories.Where(m => m.Id == repositoryId)
+               .Include(u => u.Cabinet)
                .FirstOrDefault();
             if (repository == null)
                 throw new BadRequestException("Repository khong ton tai");
-            return new RepositoryEntity(repository, repository.Cabinets);
+            return new RepositoryEntity(repository, repository.Cabinet);
         }
 
         public List<RepositoryEntity> Get()
         {
 
-            IQueryable<Repository> repositories = smartDeliveryContext.Repositories
-                 .Include(u => u.Cabinets);
-            return repositories.Select(u => new RepositoryEntity(u, u.Cabinets)).ToList();
+            IQueryable<Repositories> repositories = smartDeliveryContext.Repositories
+                 .Include(u => u.Cabinet);
+            return repositories.Select(u => new RepositoryEntity(u, u.Cabinet)).ToList();
         }
 
         public RepositoryEntity Update(Guid repositoryId, RepositoryEntity repositoryEntity)
         {
 
-            Repository repository = smartDeliveryContext.Repositories.Where(m => m.Id == repositoryId)
-                .Include(u => u.Cabinets)
+            Repositories repository = smartDeliveryContext.Repositories.Where(m => m.Id == repositoryId)
+                .Include(u => u.Cabinet)
                 .FirstOrDefault();
             if (repository == null)
                 throw new BadRequestException("Repository khong ton tai");

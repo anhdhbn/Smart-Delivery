@@ -11,7 +11,7 @@ namespace SmartDelivery.Modules.MGoods
     {
         public GoodsEntity Create(GoodsEntity goodsEntity)
         {
-            Good good = goodsEntity.ToModel();
+            Goods good = goodsEntity.ToModel();
             smartDeliveryContext.Goods.Add(good);
             smartDeliveryContext.SaveChanges();
             return goodsEntity;
@@ -19,9 +19,9 @@ namespace SmartDelivery.Modules.MGoods
 
         public bool Delete(Guid goodsId)
         {
-            Good good = smartDeliveryContext.Goods.Where(m => m.Id == goodsId)
-                .Include(u => u.Cabinets)
-                .Include(u => u.Scales)
+            Goods good = smartDeliveryContext.Goods.Where(m => m.Id == goodsId)
+                .Include(u => u.Cabinet)
+                .Include(u => u.Scale)
                 .Include(u => u.ShipmentGoods)
                 .FirstOrDefault();
             if (good == null)
@@ -35,28 +35,28 @@ namespace SmartDelivery.Modules.MGoods
 
         public GoodsEntity Get(Guid goodsId)
         {
-            Good good = smartDeliveryContext.Goods.Where(m => m.Id == goodsId)
-                 .Include(u => u.Cabinets)
-                 .Include(u => u.Scales)
+            Goods good = smartDeliveryContext.Goods.Where(m => m.Id == goodsId)
+                 .Include(u => u.Cabinet)
+                 .Include(u => u.Scale)
                  .Include(u => u.ShipmentGoods)
                  .FirstOrDefault();
             if (good == null)
                 throw new BadRequestException("Good khong ton tai");
-            return new GoodsEntity(good, good.Cabinets, good.Scales, good.ShipmentGoods);
+            return new GoodsEntity(good, good.Cabinet, good.Scale, good.ShipmentGoods);
         }
 
         public List<GoodsEntity> Get()
         {
-            IQueryable<Good> goods = smartDeliveryContext.Goods
-                 .Include(u => u.Cabinets)
+            IQueryable<Goods> goods = smartDeliveryContext.Goods
+                 .Include(u => u.Cabinet)
                  .Include(u => u.ShipmentGoods)
-                 .Include(u => u.Scales);
-            return goods.Select(u => new GoodsEntity(u, u.Scales, u.Cabinets, u.ShipmentGoods)).ToList();
+                 .Include(u => u.Scale);
+            return goods.Select(u => new GoodsEntity(u, u.Scale, u.Cabinet, u.ShipmentGoods)).ToList();
         }
 
         public GoodsEntity Update(Guid goodsId, GoodsEntity goodsEntity)
         {
-            Good good = smartDeliveryContext.Goods.Where(m => m.Id == goodsId).FirstOrDefault();
+            Goods good = smartDeliveryContext.Goods.Where(m => m.Id == goodsId).FirstOrDefault();
             if (good == null)
                 throw new BadRequestException("Good khong ton tai");
             goodsEntity.ToModel(good);

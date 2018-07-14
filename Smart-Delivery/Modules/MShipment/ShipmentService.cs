@@ -14,28 +14,28 @@ namespace SmartDelivery.Modules.MShipment
         public ShipmentEntity Create(ShipmentEntity ShipmentEntity)
         {
             Shipment shipment = ShipmentEntity.ToModel();
-            smartDeliveryContext.Shipments.Add(shipment);
+            smartDeliveryContext.Shipment.Add(shipment);
             smartDeliveryContext.SaveChanges();
             return ShipmentEntity;
         }
 
         public bool Delete(Guid ShipmentId)
         {
-            Shipment shipment = smartDeliveryContext.Shipments.Where(m => m.Id == ShipmentId)
+            Shipment shipment = smartDeliveryContext.Shipment.Where(m => m.Id == ShipmentId)
                .FirstOrDefault();
             if (shipment == null)
             {
                 throw new BadRequestException("Shipment khong ton tai");
 
             }
-            smartDeliveryContext.Shipments.Remove(shipment);
+            smartDeliveryContext.Shipment.Remove(shipment);
             smartDeliveryContext.SaveChanges();
             return true;
         }
 
         public ShipmentEntity Get(Guid ShipmentId)
         {
-            Shipment shipment = smartDeliveryContext.Shipments.Where(m => m.Id == ShipmentId)
+            Shipment shipment = smartDeliveryContext.Shipment.Where(m => m.Id == ShipmentId)
                  .Include(m => m.ShipmentGoods)
                  .Include(m => m.Shipper)
                  .FirstOrDefault();
@@ -46,7 +46,7 @@ namespace SmartDelivery.Modules.MShipment
 
         public List<ShipmentEntity> Get()
         {
-            IQueryable<Shipment> shipments = smartDeliveryContext.Shipments
+            IQueryable<Shipment> shipments = smartDeliveryContext.Shipment
             .Include(m => m.ShipmentGoods)
             .Include(m => m.Shipper);
             return shipments.Select(u => new ShipmentEntity(u, u.Shipper, u.ShipmentGoods)).ToList();
@@ -54,11 +54,11 @@ namespace SmartDelivery.Modules.MShipment
 
         public ShipmentEntity Update(Guid ShipmentId, ShipmentEntity ShipmentEntity)
         {
-            Shipment shipments = smartDeliveryContext.Shipments.Where(m => m.Id == ShipmentId).FirstOrDefault();
+            Shipment shipments = smartDeliveryContext.Shipment.Where(m => m.Id == ShipmentId).FirstOrDefault();
             if (shipments == null)
                 throw new BadRequestException("Shipment khong ton tai");
             ShipmentEntity.ToModel(shipments);
-            smartDeliveryContext.Shipments.Update(shipments);
+            smartDeliveryContext.Shipment.Update(shipments);
             smartDeliveryContext.SaveChanges();
             return ShipmentEntity;
         }

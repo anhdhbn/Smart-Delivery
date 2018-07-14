@@ -20,7 +20,7 @@ namespace SmartDelivery.Modules.MGoods
         public ICollection<ScaleEntity> scaleEntities { get; set; }
         public ICollection<ShipmentGoodEntity> shipmentGoodEntities { get; set; }
 
-        public GoodsEntity(Good good, params object[] args)
+        public GoodsEntity(Goods good, params object[] args)
         {
             this.Id = good.Id;
             this.IdReceiver = good.IdReceiver;
@@ -31,16 +31,16 @@ namespace SmartDelivery.Modules.MGoods
                     this.cabinetEntities = (arg as ICollection<Cabinet>).Select(u => new CabinetEntity(u)).ToList();
                 if (arg is ICollection<Scale>)
                     this.scaleEntities = (arg as ICollection<Scale>).Select(u => new ScaleEntity(u)).ToList();
-                if (arg is ICollection<ShipmentGood>)
-                    this.shipmentGoodEntities = (arg as ICollection<ShipmentGood>).Select(u => new ShipmentGoodEntity(u)).ToList();
+                if (arg is ICollection<ShipmentGoods>)
+                    this.shipmentGoodEntities = (arg as ICollection<ShipmentGoods>).Select(u => new ShipmentGoodEntity(u)).ToList();
             }
         }
 
-        public Good ToModel(Good good = null)
+        public Goods ToModel(Goods good = null)
         {
             if(good == null)
             {
-                good = new Good();
+                good = new Goods();
                 good.Id = new Guid();
             }
             good.IdReceiver = this.IdReceiver;

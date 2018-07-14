@@ -12,7 +12,7 @@ namespace SmartDelivery.Modules.MShipmentGood
     {
         public ShipmentGoodEntity Create(ShipmentGoodEntity ShipmentGoodEntity)
         {
-            ShipmentGood shipmentGood = ShipmentGoodEntity.ToModel();
+            ShipmentGoods shipmentGood = ShipmentGoodEntity.ToModel();
             smartDeliveryContext.ShipmentGoods.Add(shipmentGood);
             smartDeliveryContext.SaveChanges();
             return ShipmentGoodEntity;
@@ -20,7 +20,7 @@ namespace SmartDelivery.Modules.MShipmentGood
 
         public bool Delete(Guid ShipmentGoodId)
         {
-            ShipmentGood shipmentGood = smartDeliveryContext.ShipmentGoods.Where(m => m.Id == ShipmentGoodId)
+            ShipmentGoods shipmentGood = smartDeliveryContext.ShipmentGoods.Where(m => m.Id == ShipmentGoodId)
                 .Include(u => u.Goods)
                 .Include(u => u.Shipment)
                 .FirstOrDefault();
@@ -35,7 +35,7 @@ namespace SmartDelivery.Modules.MShipmentGood
 
         public ShipmentGoodEntity Get(Guid ShipmentGoodId)
         {
-            ShipmentGood shipmentGood = smartDeliveryContext.ShipmentGoods.Where(m => m.Id == ShipmentGoodId)
+            ShipmentGoods shipmentGood = smartDeliveryContext.ShipmentGoods.Where(m => m.Id == ShipmentGoodId)
                  .Include(u => u.Goods)
                  .Include(u => u.Shipment)
                  .FirstOrDefault();
@@ -48,7 +48,7 @@ namespace SmartDelivery.Modules.MShipmentGood
 
         public List<ShipmentGoodEntity> Get()
         {
-            IQueryable<ShipmentGood> shipmentGoods = smartDeliveryContext.ShipmentGoods
+            IQueryable<ShipmentGoods> shipmentGoods = smartDeliveryContext.ShipmentGoods
             .Include(m => m.Goods)
             .Include(m => m.Shipment);
             return shipmentGoods.Select(u => new ShipmentGoodEntity(u, u.Goods, u.Shipment)).ToList();
@@ -56,7 +56,7 @@ namespace SmartDelivery.Modules.MShipmentGood
 
         public ShipmentGoodEntity Update(Guid ShipmentGoodId, ShipmentGoodEntity ShipmentGoodEntity)
         {
-            ShipmentGood shipmentGood = smartDeliveryContext.ShipmentGoods.Where(m => m.Id == ShipmentGoodId)
+            ShipmentGoods shipmentGood = smartDeliveryContext.ShipmentGoods.Where(m => m.Id == ShipmentGoodId)
                 .Include(u => u.Goods)
                 .Include(u => u.Shipment)
                 .FirstOrDefault();

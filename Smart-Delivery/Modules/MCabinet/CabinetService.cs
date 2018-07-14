@@ -12,27 +12,27 @@ namespace SmartDelivery.Modules.MCabinet
         public CabinetEntity Create(CabinetEntity cabinetEntity)
         {
             Cabinet cabinet = cabinetEntity.ToModel();
-            smartDeliveryContext.Cabinets.Add(cabinet);
+            smartDeliveryContext.Cabinet.Add(cabinet);
             smartDeliveryContext.SaveChanges();
             return cabinetEntity;
         }
 
         public bool Delete(Guid cabinetId)
         {
-            Cabinet cabinet = smartDeliveryContext.Cabinets.Where(m => m.Id == cabinetId)
+            Cabinet cabinet = smartDeliveryContext.Cabinet.Where(m => m.Id == cabinetId)
                 .FirstOrDefault();
             if (cabinet == null)
             {
                 throw new BadRequestException("Cabinet khong ton tai");
             }
-            smartDeliveryContext.Cabinets.Remove(cabinet);
+            smartDeliveryContext.Cabinet.Remove(cabinet);
             smartDeliveryContext.SaveChanges();
             return true;
         }
 
         public CabinetEntity Get(Guid cabinetId)
         {
-            Cabinet cabinet = smartDeliveryContext.Cabinets.Where(m => m.Id == cabinetId)
+            Cabinet cabinet = smartDeliveryContext.Cabinet.Where(m => m.Id == cabinetId)
                 .Include(m => m.Goods)
                 .Include(m => m.Location)
                 .FirstOrDefault();
@@ -43,7 +43,7 @@ namespace SmartDelivery.Modules.MCabinet
 
         public List<CabinetEntity> Get()
         {
-            IQueryable<Cabinet> cabinets = smartDeliveryContext.Cabinets
+            IQueryable<Cabinet> cabinets = smartDeliveryContext.Cabinet
            .Include(m => m.Location)
            .Include(m => m.Goods);
             return cabinets.Select(u => new CabinetEntity(u, u.Location, u.Goods)).ToList();
@@ -51,11 +51,11 @@ namespace SmartDelivery.Modules.MCabinet
 
         public CabinetEntity Update(Guid cabinetId, CabinetEntity cabinetEntity)
         {
-            Cabinet cabinet = smartDeliveryContext.Cabinets.Where(m => m.Id == cabinetId).FirstOrDefault();
+            Cabinet cabinet = smartDeliveryContext.Cabinet.Where(m => m.Id == cabinetId).FirstOrDefault();
             if (cabinet == null)
                 throw new BadRequestException("Cabinet khong ton tai");
             cabinetEntity.ToModel(cabinet);
-            smartDeliveryContext.Cabinets.Update(cabinet);
+            smartDeliveryContext.Cabinet.Update(cabinet);
             smartDeliveryContext.SaveChanges();
             return cabinetEntity;
         }

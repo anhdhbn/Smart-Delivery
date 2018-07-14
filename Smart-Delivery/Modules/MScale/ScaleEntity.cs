@@ -22,7 +22,7 @@ namespace SmartDelivery.Modules.MScale
             this.Weight = scale.Weight;
             foreach(var arg in args)
             {
-                if (arg is Good) this.GoodsEntity = scale.Goods == null ? null : new GoodsEntity(arg as Good);
+                if (arg is Goods) this.GoodsEntity = scale.Goods == null ? null : new GoodsEntity(arg as Goods);
             }
         }
 

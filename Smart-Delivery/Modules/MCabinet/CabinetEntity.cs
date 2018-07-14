@@ -30,8 +30,8 @@ namespace SmartDelivery.Modules.MCabinet
             this.Name = cabinet.Name;
             foreach(var arg in args)
             {
-                if (arg is Good) this.Goods = cabinet.Goods == null ? null : new GoodsEntity(arg as Good);
-                if (arg is Repository) this.Location = cabinet.Location == null ? null : new RepositoryEntity(arg as Repository);
+                if (arg is Goods) this.Goods = cabinet.Goods == null ? null : new GoodsEntity(arg as Goods);
+                if (arg is Repositories) this.Location = cabinet.Location == null ? null : new RepositoryEntity(arg as Repositories);
             }
         }
 

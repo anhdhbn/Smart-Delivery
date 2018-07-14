@@ -18,31 +18,31 @@ namespace SmartDelivery.Modules.MShipper
             User.Id = shipperEntity.Id;
             User.Username = shipperEntity.Name;
             User.Password = "12345abcd";
-            smartDeliveryContext.Users.Add(User);
-            smartDeliveryContext.Shippers.Add(shipper);
+            smartDeliveryContext.User.Add(User);
+            smartDeliveryContext.Shipper.Add(shipper);
             smartDeliveryContext.SaveChanges();
             return shipperEntity;
         }
 
         public bool Delete(Guid ShipperId)
         {
-            Shipper shipper = smartDeliveryContext.Shippers.Where(m => m.Id == ShipperId)
+            Shipper shipper = smartDeliveryContext.Shipper.Where(m => m.Id == ShipperId)
                .Include(u => u.IdNavigation)
                .FirstOrDefault();
-            User user = smartDeliveryContext.Users.Where(m => m.Id == ShipperId).FirstOrDefault();
+            User user = smartDeliveryContext.User.Where(m => m.Id == ShipperId).FirstOrDefault();
             if (shipper == null)
             {
                 throw new BadRequestException("Shipper khong ton tai");
             }
-            smartDeliveryContext.Users.Remove(user);
-            smartDeliveryContext.Shippers.Remove(shipper);
+            smartDeliveryContext.User.Remove(user);
+            smartDeliveryContext.Shipper.Remove(shipper);
             smartDeliveryContext.SaveChanges();
             return true;
         }
 
         public CustomerEntity Get(Guid ShipperId)
         {
-            Shipper shipper = smartDeliveryContext.Shippers.Where(m => m.Id == ShipperId)
+            Shipper shipper = smartDeliveryContext.Shipper.Where(m => m.Id == ShipperId)
                .Include(u => u.IdNavigation)
                .FirstOrDefault();
             if (shipper == null)
@@ -54,14 +54,14 @@ namespace SmartDelivery.Modules.MShipper
 
         public List<CustomerEntity> Get()
         {
-            IQueryable<Shipper> shippers = smartDeliveryContext.Shippers
+            IQueryable<Shipper> shippers = smartDeliveryContext.Shipper
             .Include(m => m.IdNavigation);
             return shippers.Select(u => new CustomerEntity(u,u.IdNavigation)).ToList();
         }
 
         public CustomerEntity Update(Guid ShipperId, CustomerEntity ShipperEntity)
         {
-            Shipper shipper = smartDeliveryContext.Shippers.Where(m => m.Id == ShipperId)
+            Shipper shipper = smartDeliveryContext.Shipper.Where(m => m.Id == ShipperId)
                .Include(u => u.IdNavigation)
                .FirstOrDefault();
             if (shipper == null)
@@ -69,7 +69,7 @@ namespace SmartDelivery.Modules.MShipper
                 throw new BadRequestException("Shipper khong ton tai");
             }
             ShipperEntity.ToModel(shipper);
-            smartDeliveryContext.Shippers.Update(shipper);
+            smartDeliveryContext.Shipper.Update(shipper);
             smartDeliveryContext.SaveChanges();
             return ShipperEntity;
         }

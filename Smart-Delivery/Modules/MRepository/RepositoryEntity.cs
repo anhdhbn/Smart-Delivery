@@ -14,7 +14,7 @@ namespace SmartDelivery.Modules.MRepository
 
         public ICollection<CabinetEntity> Cabinets { get; set; }
 
-        public RepositoryEntity(Repository repository, params object[] args)
+        public RepositoryEntity(Repositories repository, params object[] args)
         {
             this.Id = repository.Id;
             this.Location = repository.Location;
@@ -25,11 +25,11 @@ namespace SmartDelivery.Modules.MRepository
             }
         }
 
-        public Repository ToModel(Repository repository = null)
+        public Repositories ToModel(Repositories repository = null)
         {
             if(repository == null)
             {
-                repository = new Repository();
+                repository = new Repositories();
                 repository.Id = new Guid();
             }
             repository.Location = this.Location;
