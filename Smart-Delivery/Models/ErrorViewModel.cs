@@ -1,6 +1,6 @@
 using System;
 
-namespace Smart_Delivery.Models
+namespace SmartDelivery.Models
 {
     public class ErrorViewModel
     {

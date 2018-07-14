@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Smart_Delivery.Models;
+using SmartDelivery.Models;
 
-namespace Smart_Delivery.Controllers
+namespace SmartDelivery.Controllers
 {
     public class HomeController : Controller
     {
