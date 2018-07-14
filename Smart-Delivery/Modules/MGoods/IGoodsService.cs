@@ -13,6 +13,8 @@ namespace SmartDelivery.Modules.MGoods
         List<GoodsEntity> Get();
         GoodsEntity Update(Guid goodsId, GoodsEntity olderEntity);
         bool Delete(Guid goodsId);
+        List<GoodsEntity> GetByReceiverId(Guid receiverId);
+        List<GoodsEntity> GetBySenderId(Guid senderId);
 
     }
 }

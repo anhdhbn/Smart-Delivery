@@ -15,7 +15,7 @@ namespace SmartDelivery.Modules.MShipmentGood
             ShipmentGoods shipmentGood = ShipmentGoodEntity.ToModel();
             smartDeliveryContext.ShipmentGoods.Add(shipmentGood);
             smartDeliveryContext.SaveChanges();
-            return ShipmentGoodEntity;
+            return new ShipmentGoodEntity(shipmentGood);
         }
 
         public bool Delete(Guid ShipmentGoodId)

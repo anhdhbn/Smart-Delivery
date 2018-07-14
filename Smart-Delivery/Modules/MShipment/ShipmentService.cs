@@ -16,7 +16,7 @@ namespace SmartDelivery.Modules.MShipment
             Shipment shipment = ShipmentEntity.ToModel();
             smartDeliveryContext.Shipment.Add(shipment);
             smartDeliveryContext.SaveChanges();
-            return ShipmentEntity;
+            return new ShipmentEntity(shipment);
         }
 
         public bool Delete(Guid ShipmentId)

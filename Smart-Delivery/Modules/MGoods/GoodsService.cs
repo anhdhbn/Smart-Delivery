@@ -14,7 +14,7 @@ namespace SmartDelivery.Modules.MGoods
             Goods good = goodsEntity.ToModel();
             smartDeliveryContext.Goods.Add(good);
             smartDeliveryContext.SaveChanges();
-            return goodsEntity;
+            return new GoodsEntity(good);
         }
 
         public bool Delete(Guid goodsId)
@@ -43,6 +43,24 @@ namespace SmartDelivery.Modules.MGoods
             if (good == null)
                 throw new BadRequestException("Good khong ton tai");
             return new GoodsEntity(good, good.Cabinet, good.Scale, good.ShipmentGoods);
+        }
+
+        public List<GoodsEntity> GetByReceiverId(Guid receiverId)
+        {
+            IQueryable<Goods> goods = smartDeliveryContext.Goods.Where(u => u.IdReceiver == receiverId)
+                 .Include(u => u.Cabinet)
+                 .Include(u => u.ShipmentGoods)
+                 .Include(u => u.Scale);
+            return goods.Select(u => new GoodsEntity(u, u.Scale, u.Cabinet, u.ShipmentGoods)).ToList();
+        }
+
+        public List<GoodsEntity> GetBySenderId(Guid senderId)
+        {
+            IQueryable<Goods> goods = smartDeliveryContext.Goods.Where(u => u.IdSender == senderId)
+                 .Include(u => u.Cabinet)
+                 .Include(u => u.ShipmentGoods)
+                 .Include(u => u.Scale);
+            return goods.Select(u => new GoodsEntity(u, u.Scale, u.Cabinet, u.ShipmentGoods)).ToList();
         }
 
         public List<GoodsEntity> Get()
