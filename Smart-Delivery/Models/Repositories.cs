@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace SmartDelivery.Models
 {
-    public partial class Repository
+    public partial class Repositories
     {
-        public Repository()
+        public Repositories()
         {
-            Cabinets = new HashSet<Cabinet>();
+            Cabinet = new HashSet<Cabinet>();
         }
 
         public Guid Id { get; set; }
         public string Location { get; set; }
 
-        public ICollection<Cabinet> Cabinets { get; set; }
+        public ICollection<Cabinet> Cabinet { get; set; }
     }
 }

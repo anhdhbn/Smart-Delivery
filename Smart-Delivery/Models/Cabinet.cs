@@ -12,7 +12,7 @@ namespace SmartDelivery.Models
         public Guid? LocationId { get; set; }
         public string Name { get; set; }
 
-        public Good Goods { get; set; }
-        public Repository Location { get; set; }
+        public Goods Goods { get; set; }
+        public Repositories Location { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace SmartDelivery.Models
         public Guid GoodsId { get; set; }
         public double Weight { get; set; }
 
-        public Good Goods { get; set; }
+        public Goods Goods { get; set; }
     }
 }

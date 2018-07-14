@@ -7,7 +7,7 @@ namespace SmartDelivery.Models
     {
         public Shipper()
         {
-            Shipments = new HashSet<Shipment>();
+            Shipment = new HashSet<Shipment>();
         }
 
         public Guid Id { get; set; }
@@ -16,6 +16,6 @@ namespace SmartDelivery.Models
         public string Phone { get; set; }
 
         public User IdNavigation { get; set; }
-        public ICollection<Shipment> Shipments { get; set; }
+        public ICollection<Shipment> Shipment { get; set; }
     }
 }
