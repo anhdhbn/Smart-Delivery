@@ -13,13 +13,14 @@ namespace SmartDelivery.Modules.MCabinet
         public Guid Id { get; set; }
         public bool? IsOpended { get; set; }
         public Guid? GoodsId { get; set; }
-        public Guid Code { get; set; }
+        public string Code { get; set; }
         public Guid? LocationId { get; set; }
         public string Name { get; set; }
         public bool? IsHadGoods { get; set; }
 
         public GoodsEntity Goods { get; set; }
         public RepositoryEntity Location { get; set; }
+        public bool? IsRecievieCabinet { get; set; }
         public CabinetEntity() { }
 
         public CabinetEntity(Cabinet cabinet, params object[] args)
@@ -31,6 +32,7 @@ namespace SmartDelivery.Modules.MCabinet
             this.Code = cabinet.Code;
             this.LocationId = cabinet.LocationId;
             this.Name = cabinet.Name;
+            this.IsRecievieCabinet = cabinet.IsRecievieCabinet;
             foreach(var arg in args)
             {
                 if (arg is Goods) this.Goods = cabinet.Goods == null ? null : new GoodsEntity(arg as Goods);
@@ -51,6 +53,7 @@ namespace SmartDelivery.Modules.MCabinet
             cabinet.GoodsId = this.GoodsId;
             cabinet.Code = this.Code;
             cabinet.LocationId = this.LocationId;
+            cabinet.IsRecievieCabinet = this.IsRecievieCabinet;
             return cabinet;
         }
     }

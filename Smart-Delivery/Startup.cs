@@ -37,16 +37,16 @@ namespace SmartDelivery
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddSingleton<IMqttClientMain, MqttClientMain>();
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            
             services.AddHostedMqttServer(builder =>
             {
                 builder.WithDefaultEndpointPort(1883);
             });
+            services.AddSingleton<IMqttClientMain, MqttClientMain>();
 
-            
             services.AddMqttTcpServerAdapter();
             services.AddMqttWebSocketServerAdapter();
 
@@ -74,13 +74,12 @@ namespace SmartDelivery
                         .AsImplementedInterfaces()
                         .WithTransientLifetime()
                     .AddClasses(classes => classes.AssignableTo<IScopedService>())
-                        .As<IScopedService>()
-                        .WithScopedLifetime());
-
+                        .As<IScopedService>());
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IMqttServer mqttServer)
         {
             app.UseCors(o => o
                 .AllowCredentials()
@@ -101,7 +100,7 @@ namespace SmartDelivery
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            MqttConfig mqttConfig = new MqttConfig(app.ApplicationServices.GetService<IMqttServer>(), app.ApplicationServices.GetService<IMqttClientMain>());
+            MqttConfig mqttConfig = new MqttConfig(mqttServer, app.ApplicationServices.GetService<IMqttClientMain>());
             mqttConfig.Config();
 
             app.UseMvc(routes =>
