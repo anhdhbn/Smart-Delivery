@@ -55,6 +55,11 @@ namespace SmartDelivery.Models
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.IsHadGoods).HasColumnName("isHadGoods");
 
                 entity.Property(e => e.IsOpended).HasColumnName("isOpended");
